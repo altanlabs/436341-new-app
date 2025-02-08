@@ -1,135 +1,101 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Card } from "@/components/ui/card"
-import { motion } from "framer-motion"
-import { Search, ShoppingCart, Bell, Home, Paw, ShoppingBag, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Avatar } from "@/components/ui/avatar";
+import { NavigationBar } from "@/components/blocks/navigation-bar";
+import { PetCard } from "@/components/blocks/pet-card";
+import { FeatureSection } from "@/components/blocks/feature-section";
+import { AppointmentList } from "@/components/blocks/appointment-list";
 
-export default function IndexPage() {
+const mockPets = [
+  {
+    id: "1",
+    name: "Kira",
+    type: "Perro",
+    breed: "Border Collie",
+    image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+  },
+];
+
+const mockAppointments = [
+  {
+    id: "1",
+    petName: "Lolo",
+    title: "Cita con el veterinario",
+    date: new Date(2024, 1, 23),
+    time: "18:00 h",
+  },
+  {
+    id: "2",
+    petName: "Lolo",
+    title: "Cita con el veterinario",
+    date: new Date(2024, 1, 25),
+    time: "16:30 h",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="max-w-md mx-auto h-screen bg-background">
-      {/* Status Bar */}
-      <div className="flex justify-between items-center px-4 py-2 bg-background">
-        <span className="text-sm">09:41</span>
-        <div className="flex items-center gap-2">
-          <span className="text-sm">●●●●●</span>
-        </div>
-      </div>
-
+    <div className="pb-20">
       {/* Header */}
-      <header className="px-4 py-2 flex justify-between items-center">
+      <header className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="/placeholder-user.jpg" />
-            <AvatarFallback>M</AvatarFallback>
+          <Avatar className="h-12 w-12">
+            <img
+              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+              alt="María"
+              className="object-cover"
+            />
           </Avatar>
           <div>
-            <p className="text-sm text-muted-foreground">Hola,</p>
-            <h2 className="font-semibold">Maria</h2>
+            <p className="text-gray-600 dark:text-gray-400">Hola,</p>
+            <h1 className="text-xl font-bold">María</h1>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <Search className="h-6 w-6 text-muted-foreground" />
-          <ShoppingCart className="h-6 w-6 text-muted-foreground" />
-          <Bell className="h-6 w-6 text-muted-foreground" />
+        <div className="flex gap-4">
+          <button className="text-gray-600 dark:text-gray-300">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+          <button className="text-gray-600 dark:text-gray-300">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </button>
         </div>
       </header>
 
-      {/* Mis Peludos Section */}
-      <section className="px-4 mt-6">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-semibold">Mis peludos</h3>
-          <span className="text-muted-foreground">3</span>
-        </div>
-        
-        <Card className="bg-blue-100 p-4 rounded-xl flex justify-between items-center">
-          <div>
-            <h4 className="font-bold text-lg">Kira</h4>
-            <p className="text-sm text-muted-foreground">Perro | Border Collie</p>
+      {/* Main Content */}
+      <main className="p-4 space-y-6">
+        {/* Pets Section */}
+        <section>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold">Mis peludos</h2>
+            <span className="bg-primary/10 text-primary px-2 py-1 rounded-full text-sm">
+              {mockPets.length}
+            </span>
           </div>
-          <Avatar className="h-12 w-12">
-            <AvatarImage src="/dog-avatar.jpg" />
-            <AvatarFallback>K</AvatarFallback>
-          </Avatar>
-        </Card>
-      </section>
-
-      {/* Quick Actions */}
-      <section className="px-4 mt-6 grid grid-cols-2 gap-4">
-        <Card className="p-4 rounded-xl">
-          <h4 className="font-semibold mb-2">Comunidad</h4>
-          <div className="h-24 flex items-center justify-center">
-            <img src="/community.svg" alt="Comunidad" className="h-20" />
-          </div>
-        </Card>
-        <Card className="p-4 rounded-xl">
-          <h4 className="font-semibold mb-2">Actividades</h4>
-          <div className="h-24 flex items-center justify-center">
-            <img src="/activities.svg" alt="Actividades" className="h-20" />
-          </div>
-        </Card>
-      </section>
-
-      {/* Próximas Citas */}
-      <section className="px-4 mt-6">
-        <h3 className="font-semibold mb-4">Próximas citas</h3>
-        <div className="space-y-4">
-          {[1, 2].map((_, index) => (
-            <Card key={index} className="p-4 rounded-xl">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h4 className="font-semibold">Lolo</h4>
-                  <p className="text-sm text-muted-foreground">Cita con el veterinario</p>
-                  <p className="text-sm text-muted-foreground">Miércoles 23 | 18:00 h</p>
-                </div>
-                <Button variant="ghost" size="icon">
-                  <span className="sr-only">Ver detalles</span>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9 18L15 12L9 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Button>
-              </div>
-            </Card>
+          {mockPets.map((pet) => (
+            <PetCard key={pet.id} {...pet} />
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-background border-t border-border px-4 py-2">
-        <div className="flex justify-between items-center">
-          <Button variant="ghost" size="icon" className="flex flex-col items-center">
-            <Home className="h-6 w-6" />
-            <span className="text-xs">Home</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="flex flex-col items-center">
-            <Paw className="h-6 w-6" />
-            <span className="text-xs">Peludos</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="flex flex-col items-center">
-            <ShoppingBag className="h-6 w-6" />
-            <span className="text-xs">Servicios</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="flex flex-col items-center">
-            <ShoppingCart className="h-6 w-6" />
-            <span className="text-xs">Tienda</span>
-          </Button>
-          <Button variant="ghost" size="icon" className="flex flex-col items-center">
-            <Users className="h-6 w-6" />
-            <span className="text-xs">Social</span>
-          </Button>
-        </div>
-      </nav>
+        {/* Features Grid */}
+        <section className="grid grid-cols-2 gap-4">
+          <FeatureSection
+            title="Comunidad"
+            image="/images/community.png"
+          />
+          <FeatureSection
+            title="Actividades"
+            image="/images/activities.png"
+          />
+        </section>
+
+        {/* Appointments */}
+        <AppointmentList appointments={mockAppointments} />
+      </main>
+
+      {/* Navigation */}
+      <NavigationBar />
     </div>
-  )
+  );
 }
